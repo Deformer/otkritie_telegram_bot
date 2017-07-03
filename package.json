@@ -1,0 +1,28 @@
+{
+  "name": "otkritie_telegram_bot",
+  "version": "1.0.0",
+  "description": "otkritie_telegram_bot",
+  "main": "nl_analysis.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deformer/otkritie_telegram_bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Deformer/otkritie_telegram_bot/issues"
+  },
+  "homepage": "https://github.com/Deformer/otkritie_telegram_bot#readme",
+  "dependencies": {
+    "eslint": "^4.1.1",
+    "yandex-speech": "0.0.13"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.6.1"
+  }
+}
