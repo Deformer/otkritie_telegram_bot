@@ -9,6 +9,7 @@ const parseString = require('xml2js').parseString;
 const fs = require('fs');
 const natural = require('natural');
 const iconv = require('iconv-lite');
+const taskService = require('./task');
 
 natural.PorterStemmerRu.attach();
 const stemmingRussianText = text => new Promise((resolve, reject) => {
@@ -39,7 +40,7 @@ const translateVoiceToText = fileName => new Promise((resolve, reject) => {
     uuid: uuidv4().replace(/-/g, ''),    // UUID without hyphens
     topic: 'queries',  // ['queries', 'maps', 'notes', 'music']
     lang: 'ru-RU',      // ['ru-RU', 'tr-TR'],
-    filetype: 'audio/x-mpeg-3',  // ['audio/x-speex', 'audio/x-pcm;bit=16;rate=8000', 'audio/x-pcm;bit=16;rate=16000', 'audio/x-alaw;bit=13;rate=8000', 'audio/x-wav', 'audio/x-mpeg-3']
+    filetype: 'audio/ogg;codecs=opus',  // ['audio/x-speex', 'audio/x-pcm;bit=16;rate=8000', 'audio/x-pcm;bit=16;rate=16000', 'audio/x-alaw;bit=13;rate=8000', 'audio/x-wav', 'audio/x-mpeg-3']
   }, (err, httpResponse, xml) => {
     if (err) {
       reject(err);
@@ -49,11 +50,19 @@ const translateVoiceToText = fileName => new Promise((resolve, reject) => {
   }));
 });
 
-// translateVoiceToText('public/ATM/1.mp3').then((response) => {
-//   stemmingRussianText(response.results[0].text).then((stemmedWords) => {
-//     console.log(stemmedWords);
-//   });
-// });
+module.exports = {
+  translateVoiceToText,
+  stemmingRussianText,
+};
+
+/* translateVoiceToText('../public/disableSmsNotif/1.mp3').then((response) => {
+  stemmingRussianText(response.results[0].text).then((stemmedWords) => {
+    // console.log(stemmedWords);
+    taskService.findTaskKeyWords(stemmedWords).then((res) => {
+      console.log(res[0].answer);
+    });
+  });
+});*/
 
 const parseCSV = fileName => new Promise((resolve, reject) => {
   fs.readFile(fileName, (err, data) => {
@@ -82,7 +91,7 @@ const parseCSV = fileName => new Promise((resolve, reject) => {
 //   console.log(err);
 // });
 
-fs.readFile('public/disableSmsNotif/phrases.txt', (err, data) => {
+/* fs.readFile('../public/pinCode/phrases.txt', (err, data) => {
   if (err) return console.log(err);
   const lines = data.toString().split('\n');
   lines.forEach((line) => {
@@ -91,5 +100,5 @@ fs.readFile('public/disableSmsNotif/phrases.txt', (err, data) => {
     });
   })
 
-});
+});*/
 
