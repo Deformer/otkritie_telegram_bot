@@ -4,7 +4,8 @@
   "description": "otkritie_telegram_bot",
   "main": "nl_analysis.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,13 @@
   },
   "homepage": "https://github.com/Deformer/otkritie_telegram_bot#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "eslint": "^4.1.1",
+    "express": "^4.15.3",
+    "iconv-lite": "^0.4.18",
     "natural": "^0.5.4",
+    "pg": "^6.4.0",
+    "sequelize": "^4.2.1",
     "uuid": "^3.1.0",
     "xml2js": "^0.4.17",
     "yandex-speech": "0.0.13"
