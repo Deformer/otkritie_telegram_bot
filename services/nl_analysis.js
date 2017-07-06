@@ -35,12 +35,12 @@ const formatSuccessResponse = xml => new Promise((resolve, reject) => {
 });
 const translateVoiceToText = fileName => new Promise((resolve, reject) => {
   fs.createReadStream(fileName).pipe(yandexSpeech.ASR({
-    developer_key: config.yandexSpeechKey,  // get in Yandex Developer Center
+    developer_key: config.yandexSpeechKey, // get in Yandex Developer Center
     // file: 'public/how_to_reestablish_pin.mp3', // check format
-    uuid: uuidv4().replace(/-/g, ''),    // UUID without hyphens
-    topic: 'queries',  // ['queries', 'maps', 'notes', 'music']
-    lang: 'ru-RU',      // ['ru-RU', 'tr-TR'],
-    filetype: 'audio/ogg;codecs=opus',  // ['audio/x-speex', 'audio/x-pcm;bit=16;rate=8000', 'audio/x-pcm;bit=16;rate=16000', 'audio/x-alaw;bit=13;rate=8000', 'audio/x-wav', 'audio/x-mpeg-3']
+    uuid: uuidv4().replace(/-/g, ''), // UUID without hyphens
+    topic: 'queries', // ['queries', 'maps', 'notes', 'music']
+    lang: 'ru-RU', // ['ru-RU', 'tr-TR'],
+    filetype: 'audio/ogg;codecs=opus', // ['audio/x-speex', 'audio/x-pcm;bit=16;rate=8000', 'audio/x-pcm;bit=16;rate=16000', 'audio/x-alaw;bit=13;rate=8000', 'audio/x-wav', 'audio/x-mpeg-3']
   }, (err, httpResponse, xml) => {
     if (err) {
       reject(err);
@@ -55,7 +55,8 @@ module.exports = {
   stemmingRussianText,
 };
 
-/* translateVoiceToText('../public/disableSmsNotif/1.mp3').then((response) => {
+/* translateVoiceToText('../resources/voice/5399852292935516188.ogg').then((response) => {
+   console.log(response);
   stemmingRussianText(response.results[0].text).then((stemmedWords) => {
     // console.log(stemmedWords);
     taskService.findTaskKeyWords(stemmedWords).then((res) => {
