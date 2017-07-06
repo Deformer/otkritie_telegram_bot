@@ -11,6 +11,7 @@ let audioFileArray = [];
 module.exports = {
     init: function () {
         bot.on('message', (msg) => {
+            // console.log(msg);
             if (msg.voice) {
                 let fileId = msg.voice.file_id;
                 bot.getFile(fileId).then(response =>{
@@ -19,20 +20,19 @@ module.exports = {
                         let newFile = fs.createWriteStream(`./resources/${filePath}`);
                         request(fileLink).pipe(newFile);
 
-                        let fileMeta = {fileId: fileId, fileLink: fileLink};
+                        let fileMeta = {chatId: msg.chat.id, fileId: fileId, fileLink: fileLink};
                         audioFileArray.push(fileMeta);
-                        console.log(`New voice message received: ${fileMeta}`);
+                        console.log(`New voice message received: ${fileId}`);
                     });
                 });
             }
-            else if (msg.entities[0].type === 'bot_command') {
+            else if (msg.entities && msg.entities[0].type === 'bot_command') {
                 let fullCommand = msg.text;
                 console.log(`New bot command received: ${fullCommand}`);
                 switch (fullCommand) {
                     case '/print': {
-                        console.log("Files:");
                         audioFileArray.forEach(file => {
-                            console.log(file);
+                            bot.sendMessage(file.chatId, `Link file: ${file.fileLink}`);
                         })
                     }
                 }
