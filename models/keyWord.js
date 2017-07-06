@@ -11,6 +11,9 @@ const KeyWord = connection.define('key_word', {
   text: {
     type: Sequelize.STRING,
   },
+  type: {
+    type: Sequelize.STRING,
+  },
 });
 
 
