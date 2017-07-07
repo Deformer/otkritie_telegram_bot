@@ -14,6 +14,7 @@ const audioFileArray = [];
 module.exports = {
   init() {
     bot.on('message', (msg) => {
+        bot.sendChatAction(msg.chat.id, 'typing');
       // console.log(msg);
       if (msg.voice) {
         const fileId = msg.voice.file_id;
