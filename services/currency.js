@@ -6,14 +6,10 @@ const http = require('http');
 const concat = require('concat-stream');
 const parser = require('xml2js');
 
-const getEuro = ()  => {
-
-}
-
-const getDollar = () => {
-
-}
-
+/**
+ * Возвращает объект с данными необходимой валюты
+ * @param type
+ */
 const getCurrency = (type) => new Promise((resolve, reject) => {
     http.get("http://www.cbr.ru/scripts/XML_daily.asp?", resp => {
         resp.on('error', err => reject(error));

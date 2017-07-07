@@ -8,7 +8,8 @@ module.exports = {
   telegramToken: '438983860:AAFyWo2HsJzkNspcW7GuNytjy_fAObGg5bo',
   googlePlacesApiKey: 'AIzaSyCwNv8ZQEXLhyXuVpVyTsU86Xg5i8S8Voo',
   constants: {
-   maxAtmCount: 10
+    maxAtmCount: 10,
+    searchRadius: 10000,
   },
   dbSettings: {
     database: 'telegram',
