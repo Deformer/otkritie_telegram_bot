@@ -5,6 +5,7 @@ const fs = require('fs');
 const config = require('./config');
 const { translateVoiceToText, stemmingRussianText } = require('./services/nl_analysis');
 const taskService = require('./services/task');
+const currencyService = require('./services/currency');
 
 const bot = new TelegramBot(config.telegramToken, { polling: true });
 
@@ -27,9 +28,18 @@ module.exports = {
                 .then(translatedText => translatedText)
                 .then(translatedText => stemmingRussianText(translatedText.results[0].text))
                 .then((stemmedWords) => {
+                console.log(stemmedWords);
                   taskService.findTaskKeyWords(stemmedWords).then((res) => {
                     if (res.length !== 0) {
-                      bot.sendMessage(msg.chat.id, res[0].answer);
+                      if (stemmedWords.indexOf('евр') > -1 || stemmedWords.indexOf('доллар') > -1) {
+                        const type = stemmedWords.indexOf('евр') > -1 ? 'EUR' : 'USD';
+                        currencyService.getCurrency(type)
+                            .then(info => {
+                              // console.log('result is', info);
+                              const value = info.Value;
+                              bot.sendMessage(msg.chat.id, res[0].answer + value);
+                            })
+                      } else bot.sendMessage(msg.chat.id, res[0].answer);
                     } else {
                       bot.sendMessage(msg.chat.id, 'ваш запрос гавно');
                     }
