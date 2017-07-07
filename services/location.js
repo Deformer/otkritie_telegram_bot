@@ -14,7 +14,7 @@ const getNearAtm = (lat, lon) => new Promise((resolve, reject) => {
         resp.pipe(concat(buffer => {
             const data = JSON.parse(buffer.toString());
             console.log(data);
-            resolve (data.results.slice(0,10));
+            resolve (data.results.slice(0,config.constants.maxAtmCount));
         }))
     })
 });
