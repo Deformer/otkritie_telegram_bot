@@ -22,7 +22,7 @@ Task.hasMany(KeyWord, { foreignKey: 'taskId' });
 
 module.exports = Task;
 
-/* Task.create({
+/*Task.create({
   answer: `Услуга "смс-инфо" платная по Вашей карте. Вы можете
 отключить данную услугу по телефону нашей горячей
 линии (звонок бесплатный), в отделении банка и через
@@ -31,88 +31,112 @@ module.exports = Task;
   key_words: [
     {
       text: 'отключ',
-      type: 'verbs'
+      type: 'verbs',
     },
     {
       text: 'смс',
-      type: 'nouns'
+      type: 'nouns',
     },
     {
       text: 'sms',
-      type: 'nouns'
-    }
+      type: 'nouns',
+    },
   ],
 }, {
   include: [KeyWord],
-});*/
+});
 
-/*Task.create({
-    answer: `Ближайший банкомат в ТЦ "Галлерея"`,
-    key_words: [
-        {
-            text: 'банкомат',
-            type: 'nouns'
-        },
-        {
-            text: 'ближайш',
-            type: 'verbs'
-        },
-        {
-            text: 'покаж',
-            type: 'verbs'
-        },
-        {
-            text: 'где',
-            type: 'nouns'
-        },
-        {
-            text: 'ряд',
-            type: 'nouns'
-        },
-        {
-            text: 'недалек',
-            type: 'nouns'
-        }
-    ],
+Task.create({
+  answer: 'Ближайший банкомат в ТЦ "Галлерея"',
+  key_words: [
+    {
+      text: 'банкомат',
+      type: 'nouns',
+    },
+    {
+      text: 'ближайш',
+      type: 'verbs',
+    },
+    {
+      text: 'покаж',
+      type: 'verbs',
+    },
+    {
+      text: 'где',
+      type: 'verbs',
+    },
+    {
+      text: 'ряд',
+      type: 'verbs',
+    },
+    {
+      text: 'недалек',
+      type: 'verbs',
+    },
+  ],
 }, {
-    include: [KeyWord],
-});*/
+  include: [KeyWord],
+});
 
-/*Task.create({
-    answer: `Курс доллара на сегодня: `,
-    type: 'USD',
-    key_words: [
-        {
-            text: 'курс',
-            type: 'verbs'
-        },
-        {
-            text: 'доллар',
-            type: 'nouns'
-        }
-    ],
+Task.create({
+  answer: 'Курс доллара на сегодня: ',
+  type: 'USD',
+  key_words: [
+    {
+      text: 'курс',
+      type: 'verbs',
+    },
+    {
+      text: 'доллар',
+      type: 'nouns',
+    },
+    {
+      text: 'сто',
+      type: 'verbs',
+    },
+    {
+      text: 'стоим',
+      type: 'verbs',
+    },
+    {
+      text: 'цен',
+      type: 'verbs',
+    },
+  ],
 }, {
-    include: [KeyWord],
-});*/
+  include: [KeyWord],
+});
 
-/*Task.create({
-    answer: `Курс евро на сегодня: `,
-    type: 'EUR',
-    key_words: [
-        {
-            text: 'курс',
-            type: 'verbs'
-        },
-        {
-            text: 'евр',
-            type: 'nouns'
-        }
-    ],
+Task.create({
+  answer: 'Курс евро на сегодня: ',
+  type: 'EUR',
+  key_words: [
+    {
+      text: 'курс',
+      type: 'verbs',
+    },
+    {
+      text: 'евр',
+      type: 'nouns',
+    },
+    {
+      text: 'сто',
+      type: 'verbs',
+    },
+    {
+      text: 'стоим',
+      type: 'verbs',
+    },
+    {
+      text: 'цен',
+      type: 'verbs',
+    },
+  ],
 }, {
-    include: [KeyWord],
-});*/
+  include: [KeyWord],
+});
 
-/*Task.create({
+Task.create({
   answer: `Ваш пин-код знаете только Вы. Если пин-конверта нет и Вы
 забыли пин-код, то пин-код можно сменить. Если Вам
 требуется сменить пин-код или установить его, то в
@@ -128,6 +152,10 @@ module.exports = Task;
       text: 'пинкод',
       type: 'nouns',
     },
+   {
+     text: 'код',
+     type: 'nouns',
+   },
     {
       text: 'парол',
       type: 'nouns',

@@ -17,15 +17,15 @@ module.exports = {
     const opts = {
       reply_markup: {
         one_time_keyboard: true,
-          "keyboard": [[{
-              text: "Отправить местоположение",
-              request_location: true
-          }], ["Отмена"]]
-      }
+        keyboard: [[{
+          text: 'Отправить местоположение',
+          request_location: true,
+        }], ['Отмена']],
+      },
     };
 
     bot.on('message', (msg) => {
-      //console.log(msg);
+      // console.log(msg);
       if (msg.voice) {
         bot.sendChatAction(msg.chat.id, 'typing');
         const fileId = msg.voice.file_id;
@@ -40,21 +40,20 @@ module.exports = {
                 .then(translatedText => translatedText)
                 .then(translatedText => stemmingRussianText(translatedText.results[0].text))
                 .then((stemmedWords) => {
-                console.log(stemmedWords);
                   taskService.findTaskKeyWords(stemmedWords).then((res) => {
                     if (res.length !== 0) {
                       if (stemmedWords.indexOf('евр') > -1 || stemmedWords.indexOf('доллар') > -1) {
                         const type = stemmedWords.indexOf('евр') > -1 ? 'EUR' : 'USD';
                         currencyService.getCurrency(type)
-                            .then(info => {
-                              const value = info.Value;
-                              bot.sendMessage(msg.chat.id, res[0].answer + value);
-                            })
+                          .then((info) => {
+                            const value = info.Value;
+                            bot.sendMessage(msg.chat.id, res[0].answer + value);
+                          });
                       } else if (stemmedWords.indexOf('банкомат') > -1) {
-                        bot.sendMessage(msg.chat.id, 'Для поиска банкоматов нам нужно Ваше местоположение:', opts)
+                        bot.sendMessage(msg.chat.id, 'Для поиска банкоматов нам нужно Ваше местоположение:', opts);
                       } else bot.sendMessage(msg.chat.id, res[0].answer);
                     } else {
-                      bot.sendMessage(msg.chat.id, 'ваш запрос гавно')
+                      bot.sendMessage(msg.chat.id, 'некорректный запрос');
                     }
                   });
                 });
@@ -67,24 +66,23 @@ module.exports = {
       } else if (msg.location) {
         bot.sendChatAction(msg.chat.id, 'typing');
         locationService.getNearAtm(msg.location.latitude, msg.location.longitude)
-            .then(result => {
-              if (result.length === 0) bot.sendMessage(msg.chat.id, 'В радиусе десяти киллометров банкоматы не найдены.')
-                else {
-                let message = '';
-                result.forEach(atm => {
-                  message+=atm.name+', '+atm.vicinity+'\n\n';
-                })
-                bot.sendMessage(msg.chat.id, message);
-              }
-            })
-      }
-      else if (msg.entities && msg.entities[0].type === 'bot_command') {
+          .then((result) => {
+            if (result.length === 0) bot.sendMessage(msg.chat.id, 'В радиусе десяти киллометров банкоматы не найдены.');
+            else {
+              let message = '';
+              result.forEach((atm) => {
+                message += `${atm.name}, ${atm.vicinity}\n\n`;
+              });
+              bot.sendMessage(msg.chat.id, message);
+            }
+          });
+      } else if (msg.entities && msg.entities[0].type === 'bot_command') {
         const fullCommand = msg.text;
         console.log(`New bot command received: ${fullCommand}`);
         switch (fullCommand) {
           case '/print': {
             audioFileArray.forEach((file) => {
-              bot.sendMessage(file.chatId, `тут пусто`);
+              bot.sendMessage(file.chatId, 'тут пусто');
             });
           }
         }
