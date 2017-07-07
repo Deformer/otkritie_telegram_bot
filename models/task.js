@@ -46,7 +46,73 @@ module.exports = Task;
   include: [KeyWord],
 });*/
 
-/* Task.create({
+/*Task.create({
+    answer: `Ближайший банкомат в ТЦ "Галлерея"`,
+    key_words: [
+        {
+            text: 'банкомат',
+            type: 'nouns'
+        },
+        {
+            text: 'ближайш',
+            type: 'verbs'
+        },
+        {
+            text: 'покаж',
+            type: 'verbs'
+        },
+        {
+            text: 'где',
+            type: 'nouns'
+        },
+        {
+            text: 'ряд',
+            type: 'nouns'
+        },
+        {
+            text: 'недалек',
+            type: 'nouns'
+        }
+    ],
+}, {
+    include: [KeyWord],
+});*/
+
+/*Task.create({
+    answer: `Курс доллара на сегодня: `,
+    type: 'USD',
+    key_words: [
+        {
+            text: 'курс',
+            type: 'verbs'
+        },
+        {
+            text: 'доллар',
+            type: 'nouns'
+        }
+    ],
+}, {
+    include: [KeyWord],
+});*/
+
+/*Task.create({
+    answer: `Курс евро на сегодня: `,
+    type: 'EUR',
+    key_words: [
+        {
+            text: 'курс',
+            type: 'verbs'
+        },
+        {
+            text: 'евр',
+            type: 'nouns'
+        }
+    ],
+}, {
+    include: [KeyWord],
+});*/
+
+/*Task.create({
   answer: `Ваш пин-код знаете только Вы. Если пин-конверта нет и Вы
 забыли пин-код, то пин-код можно сменить. Если Вам
 требуется сменить пин-код или установить его, то в
