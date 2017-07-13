@@ -50,11 +50,6 @@ const translateVoiceToText = fileName => new Promise((resolve, reject) => {
   }));
 });
 
-module.exports = {
-  translateVoiceToText,
-  stemmingRussianText,
-};
-
 /* translateVoiceToText('../resources/voice/5399852292935516188.ogg').then((response) => {
    console.log(response);
   stemmingRussianText(response.results[0].text).then((stemmedWords) => {
@@ -91,15 +86,34 @@ const parseCSV = fileName => new Promise((resolve, reject) => {
 // }).catch((err) => {
 //   console.log(err);
 // });
+const parsePhrases = (fileName) => {
+  fs.readFile(fileName, (err, data) => {
+    if (err) return console.log(err);
+    const lines = data.toString().split('\n');
+    // lines.forEach((line) => {
+    //   stemmingRussianText(line).then((stemmedWords) => {
+    //     stemmedWords.forEach(w => {
+    //
+    //     });
+    //   });
+    // });
+    const set = lines.reduce(
+      (prev, curr) => {
+        const stemmedWords = curr.tokenizeAndStem();
+        for (const sw of stemmedWords) {
+          prev.add(sw);
+        }
+        return prev;
+      },
+      new Set());
+    set.forEach(i => console.log(i));
+  });
+};
 
-/* fs.readFile('../public/pinCode/phrases.txt', (err, data) => {
-  if (err) return console.log(err);
-  const lines = data.toString().split('\n');
-  lines.forEach((line) => {
-    stemmingRussianText(line).then((stemmedWords) => {
-      console.log(stemmedWords);
-    });
-  })
+// parsePhrases('../public/abortPay/phrases.txt');
 
-});*/
-
+module.exports = {
+  translateVoiceToText,
+  stemmingRussianText,
+  parsePhrases,
+};
